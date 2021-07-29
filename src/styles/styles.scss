@@ -1,0 +1,19 @@
+/* En desarollo cambiamos Estylos en sass lo cambia en htm sin hacer refresh en el navigador que es otra ventaja 
+ * otra ventaja devidfir en archivos los estilos para butones , para etc ....conceptro de modolarizar
+ * aqui va solo las referencias a archivos de estilos pequeños : llamados partials : esta es la idea de modolarizar los estilos
+*/
+
+
+
+@import './base/settings';
+@import './base/base';
+
+// Components => por lo cual voy crear estilos en conforme voy avanzando : si son formularios creo estilos para forms etc ... si banner para banner asi es tendremos testilos 
+                 // modolorizados y reeutulizable
+
+@import './components/auth';
+@import './components/buttons'; // en este archivo : configuraciones globales de botones en cualquier logar en la app
+@import './components/links';
+@import './components/journal';
+@import './components/nothing';
+@import './components/notes'; 
