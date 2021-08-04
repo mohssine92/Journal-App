@@ -1,1 +1,1 @@
-* despues de la intalacion de react app , hemos borrado toods archivos mebnos index.js 
+* despues de la intalacion de react app , hemos borrado toods archivos menos index.js 
