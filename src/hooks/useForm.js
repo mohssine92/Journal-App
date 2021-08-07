@@ -14,13 +14,12 @@ export const useForm = ( initialState = {} ) => {
     }
 
 
-    const handleInputChange = ({ target }) => {
+    const handleInputChange = ({ target }) => { // producto de esa funcion es el nuevo values
         //console.log(target);
         setValues({ // cambia estado que va retunar este hook  
 
-            ...values,  // mantiene estado inicial que es un objeto con props : sabems si en target llegaa prop name con mismo nombre se caen encima modificando valor del misma
-            [ target.name ]: target.value
-
+            ...values,  // integrar las props del objeto values (que es el estado ) en este objeto
+            [ target.name ]: target.value // como el evento se aplica desde un form (element html) (y name de elementos es igual a nuestros props : suceda redefinicion : actualizacion del state)
         });
 
     }

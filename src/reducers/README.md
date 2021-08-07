@@ -3,7 +3,7 @@
 * en reducer configuramos acciones para cada diferente tipo 
 
 
-* camino : componente => hook dispatch (dispatchar accion ) => store => reducerGenearl => reducer => reducer decision => chanestateReducer => provide new atate all conmsumer view(componente) (<asi facil hacemos dispatch de una accion o acciones>) 
+* camino : componente => hook dispatch (dispatchar accion ) => store => reducerGenearl => reducer => reducer decision => changestateReducer => provide new atate all conmsumer view(componente) (<asi facil hacemos dispatch de una accion o acciones sincronas>)  (si es asyncrona se calle en mdlr se resuelva y se dispatcha)
 
 
 

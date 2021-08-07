@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch /* , useSelector  */} from 'react-redux';
+import { useDispatch  , useSelector  } from 'react-redux';
 
 
 
@@ -7,6 +7,8 @@ import { useDispatch /* , useSelector  */} from 'react-redux';
 
 
 import { Link } from 'react-router-dom'
+
+// Mis acciones 
 import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
 
 import { useForm } from '../../hooks/useForm';
@@ -19,6 +21,10 @@ export const LoginScreen = () => {
     // para hacer dispatch , ya react redux me genero un hook  (sirve para hacer dispatch de accines) 
     const dispatch = useDispatch();
 
+
+    const { loading } = useSelector( state => state.ui );
+
+    console.log(loading);
     
     
     /* custom hook - controla formulario html  */
@@ -37,12 +43,14 @@ export const LoginScreen = () => {
     const handleLogin = (e) => {
         e.preventDefault(); // prevent refresh del nav
         //console.log(email , password);
-
+         // TODO : implementar regla de validacion ver class anterior 246 
         // ? ahora necesito hacer dispatch de esa accion  
         // en este caso hago dispatch de accion async ; asi cuando se resuelva hace otro dispatch de otra accion syncrona
         // tener en cuenta que las acciones asyncronas dispatchadas se detectan(porque returnan callback) y se ejecutan en mdlr de redux 
         dispatch( startLoginEmailPassword( email, password ) );
     }
+    
+
     
     const handleGoogleLogin = () => {
         dispatch( startGoogleLogin() ); // dispatch de accion asyncrona _ (aprobar implementar contra back de node )
@@ -85,7 +93,7 @@ export const LoginScreen = () => {
                <button
                     type="submit"
                     className="btn btn-primary btn-block"
-                   /*  disabled={ true } */
+                    disabled={ loading }
                    
                 >
                     Login

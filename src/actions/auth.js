@@ -1,5 +1,7 @@
 import { types } from '../types/types';
+
 import { firebase, googleAuthProvider } from '../firebase/firebase-config';
+import { finishLoading, startLoading } from './ui';
 
 
 
@@ -13,37 +15,59 @@ export const startLoginEmailPassword = (email, password) => {
 
     return (dispatch) => { // de esta manera refresa el callback la funcion madre
                            //  dispatch : me lo ofrece thunk (mdlr de redux) (asi dispatcho accion en mi callback)
+      
 
-      
-        setTimeout(() =>{
-          
-            dispatch( login(123, 'claire-loulou') );
-
-        },3500);
-      
-      
-    
-      
-                           // dispatch( startLoading() );
+        dispatch( startLoading() );
         
         
-       /*  firebase.auth().signInWithEmailAndPassword( email, password )
+        firebase.auth().signInWithEmailAndPassword( email, password ) // 247. Realizar login de usuario con correo y contraseña
             .then( ({ user }) => { // asi cuando se resuelva la accion asyncrona - hacemos otro  dispatch de una accion syncrona (y se acabo el asunto)
+               
                 dispatch(login( user.uid, user.displayName ));
 
                 dispatch( finishLoading() );
             })
             .catch( e => {
                 console.log(e);
+
                 dispatch( finishLoading() );
-                Swal.fire('Error', e.message, 'error');
-            }) */
+               // Swal.fire('Error', e.message, 'error');
+
+            }) 
 
         
         
     }
 
 
+}
+
+
+/* como es tarea asyncrona , disparo callback
+ * gracis a thuk en vallback tengo como arg disponible dispatch
+ * la idea es cuando se resuela la async llamo al dispatch de algun accion -
+ * puedo llamar tanto dispatch quiero no hay problema
+ * 246 : crear usuario con correo Y contrseña
+ * createUserWithEmailAndPassword : esta instruccion autentica inmediatamente cuando creamos usuario (tenerlo en cuenta)
+*/
+export const startRegisterWithEmailPasswordName = ( email, password, name ) => {
+    return ( dispatch ) => {
+
+        firebase.auth().createUserWithEmailAndPassword( email, password )
+            .then( async({ user }) => { // en el momento que tengo mi user guardado en firebase alli hago el dispatch  
+
+                await user.updateProfile({ displayName: name }); //v246 (actualizar objeto)
+                
+                dispatch(
+                    login( user.uid, user.displayName )
+                );
+            })
+            .catch( e => {
+                console.log(e);
+               // Swal.fire('Error', e.message, 'error');
+            })
+
+    }
 }
 
 
@@ -56,7 +80,7 @@ export const startGoogleLogin = () => {
             .then( ({ user }) => {
                 
                 //console.log(user);
-                  dispatch( // dispatchar accion asyncrona
+                dispatch( // dispatchar accion asyncrona
                   
                     login( user.uid, user.displayName ) // 241
 
@@ -76,10 +100,10 @@ export const startGoogleLogin = () => {
 
 
 
-
+// esta accion returna objet (sincrona) va caer directamente en su reducer evaluando type .
 export const login = (uid, displayName) => ({
 
-    type: types.login, // este es el type que va Evaluar switch del Reducer : para tomar decision
+    type: types.login, // este tipe va ser evaluado por reducers(funciones returnan estados que estaran disponibles en el store)
     payload: {
         uid,
         displayName

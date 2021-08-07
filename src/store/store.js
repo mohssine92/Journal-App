@@ -5,9 +5,12 @@ import thunk from 'redux-thunk';  // es mdlr de redux - para ejecutar tareas asy
 
 
 
-
+/*  Importacion de mis reducers
+ *
+ *
+*/
 import { authReducer } from '../reducers/authReducer';
-//import { uiReducer } from '../reducers/uiReducer';
+import { uiReducer } from '../reducers/uiReducer';
  
 
 
@@ -24,7 +27,7 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 */
 const reducers = combineReducers({ // este objeto va tener la estructura que va querer que sea su store en general
    auth: authReducer, // podemos decir prop auth: va ser manejada por tal reducer .
-   //ui: uiReducer
+   ui: uiReducer
 })
 
 
