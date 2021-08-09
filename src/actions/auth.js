@@ -1,5 +1,7 @@
-import { types } from '../types/types';
 
+import Swal from 'sweetalert2' // 253 - la hemos usado en el curso de systema de reserva
+
+import { types } from '../types/types';
 import { firebase, googleAuthProvider } from '../firebase/firebase-config';
 import { finishLoading, startLoading } from './ui';
 
@@ -28,10 +30,10 @@ export const startLoginEmailPassword = (email, password) => {
                 dispatch( finishLoading() );
             })
             .catch( e => {
-                console.log(e);
+                console.log(e); // pude usar codigo de err para hacer switch escribiendo mensaje personalizado (con idiama etc)
 
                 dispatch( finishLoading() );
-               // Swal.fire('Error', e.message, 'error');
+                Swal.fire('Error', e.message, 'error'); // la puedo dispara en el momento dende quiero mandar mesanje de alerta
 
             }) 
 
@@ -64,7 +66,7 @@ export const startRegisterWithEmailPasswordName = ( email, password, name ) => {
             })
             .catch( e => {
                 console.log(e);
-               // Swal.fire('Error', e.message, 'error');
+                Swal.fire('Error', e.message, 'error');
             })
 
     }
@@ -114,7 +116,23 @@ export const login = (uid, displayName) => ({
 
 
 
+/* 
+ acciones para logout fairebase
+*/
+export const startLogout = () => { // logout en fairebase
+   
+    return async( dispatch ) => {
+        await firebase.auth().signOut();
 
+        dispatch( logout() );
+    }
+
+}
+
+
+export const logout = () => ({ // logout en Redux
+    type: types.logout
+})
 
 
 

@@ -103,7 +103,7 @@ export const RegisterScreen = () => {
                     ( /* entre parentesis parque queda aun mas claro que es el bloque de la condicion */
                         <div className="auth__alert-error">
                             { msgError }
-                        </div>
+                        </div> /* podemos sustituir con sweetallert perfectamnet 253 */
                     )
                 } 
                     

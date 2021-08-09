@@ -15,4 +15,27 @@
 
    5 - configuracion de mdlr de redux (ejecuccion de acciones asuncronas)
 
-   6 -  
+   seccion 20 :
+     ¿Qué veremos en esta sección?
+
+     Redux aplicado en nuestro proyecto
+     
+     Firebase
+     
+     FireStore
+     
+     Redux Devtools
+     
+     Thunk
+     
+     Formularios
+     
+     Google SingIn
+     
+     Acciones Asíncronas
+     
+     Mantener el estado de la autenticación
+     
+     En esta sección configuraremos Redux en nuestro proyecto por primera vez, aplicado al inicio en la parte de la autenticación y mantener el estado de la misma a lo largo de toda la aplicación.
+
+ 
