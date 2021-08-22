@@ -95,7 +95,9 @@ export const RegisterScreen = () => {
         <>
             <h3 className="auth__title">Register</h3>
 
-            <form onSubmit={ handleLogin }>
+            <form onSubmit={ handleLogin }
+                  className="animate__animated animate__fadeIn animate__faster"
+            >
 
                 { /* mostar mensaje de manera condicional : usar constantes js por eso usamos llaves */
                     msgError && /* si existe no es null ejecutamos la siguiente instruccion  */

@@ -4,6 +4,7 @@ import Swal from 'sweetalert2' // 253 - la hemos usado en el curso de systema de
 import { types } from '../types/types';
 import { firebase, googleAuthProvider } from '../firebase/firebase-config';
 import { finishLoading, startLoading } from './ui';
+import { noteLogout } from './notes';
 
 
 
@@ -122,15 +123,16 @@ export const login = (uid, displayName) => ({
 export const startLogout = () => { // logout en fairebase
    
     return async( dispatch ) => {
-        await firebase.auth().signOut();
+        await firebase.auth().signOut(); // logout de fairebase
 
         dispatch( logout() );
+        dispatch( noteLogout() ); // purgar informacion de notes del uid desconectado 
     }
 
 }
 
 
-export const logout = () => ({ // logout en Redux
+export const logout = () => ({ // puregar state auth 
     type: types.logout
 })
 

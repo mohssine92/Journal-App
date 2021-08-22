@@ -22,7 +22,7 @@ export const LoginScreen = () => {
     const dispatch = useDispatch();
 
 
-    const { loading } = useSelector( state => state.ui );
+    const { loading } = useSelector( state => state.ui ); // obtener state del stor
 
     console.log(loading);
     
@@ -69,7 +69,8 @@ export const LoginScreen = () => {
         <>
            <h3 className="auth__title" > LoginScreen </h3>
 
-           <form onSubmit={ handleLogin }>
+           <form onSubmit={ handleLogin }
+                 className="animate__animated animate__fadeIn animate__faster">
 
               <input 
                        type="text"

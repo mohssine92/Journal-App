@@ -19,6 +19,8 @@ import { PrivateRoute } from './PrivateRoute';
 import { JournalScreen } from '../components/journal/JournalScreen';
 import { login } from '../actions/auth';
 import { PublicRoute } from './PublicRoute';
+import { startLoadingNotes } from '../actions/notes';
+
 
 
 
@@ -31,7 +33,7 @@ export const AppRouter = () => {
 
      const dispatch = useDispatch(); // para hacer dispatch de algun accion (Redux hook)
  
-     const [ checking, setChecking ] = useState(true); // puedo usa REdux - stor - pero como es algo solo evaluar en esta pagina : manejo state solo aqui 
+     const [ checking, setChecking ] = useState(true); // puedo usar REdux - stor - pero como es algo solo evaluar en esta pagina : manejo state solo aqui 
      const [ isLoggedIn, setIsLoggedIn ] = useState(false); // su estado es mi punto de referncia saber si esta autenticado o no : asi tomare la decision (condicion para Proteccion de ruatas)
 
 
@@ -45,16 +47,25 @@ export const AppRouter = () => {
          *      se autentica con fairebase encima de autenticacion de otra persona por ello - necesito esperar hasta que resuelva la Observable para saber que voy a renderizar si la ruta 
          *      ir para autenticar o esta autenticado se renderiza la ruta de ojear las rutas de la app (este concept lo hemos visto en secciones anteriores) 
         */
-        firebase.auth().onAuthStateChanged( (user) => {
+        firebase.auth().onAuthStateChanged( async (user) => { //OBSERVABLE
             console.log(user)
+            console.log('cambio - me he rebderizado ')
 
             
             if ( user?.uid ) { 
-                /* Si  entro al scop realmente existe una autenticacion , no es null (objeto emitido por la Observable)
+                /* Si  entro al scop realmente existe una autenticacion en backend , no es null (objeto emitido por la Observable)
                  * hago nuevamente dispatch de accion : asi persiste la info del Object user autenticado en mi store - sin necisidad de usar localstorage gracias a Redux
                 */
                 dispatch( login( user.uid, user.displayName ) );
                 setIsLoggedIn( true );
+
+                
+                  
+                /* es el primer nivel donde tengo ya uid del user autenticado - voy a traer coleccion de objetos de notas del user autenticado de la db 
+                 y traerlos al state correspondiente */
+                dispatch( startLoadingNotes( user.uid ) ) 
+                 
+
             } else {
 
                 setIsLoggedIn( false ); // este estado avisa que no existe autenticacion (usado por proteccion de rutas)
@@ -66,9 +77,11 @@ export const AppRouter = () => {
         });
 
         
+        
     }, [ dispatch , setChecking, setIsLoggedIn ])
-       /* noten al usar hook de effect y no pasar dependecia se ejecuta la instruccion del scop solo una vez 
-        * 
+       /* la coleccion de use effect recibe dependencia que usamos dentro del mismo o una dependencia que estemos depende de su cambio
+        * este use efect se va disparar solo primer renderizacion de este componente OJOO : es un buen lugar para iniciar una Observable que va estar sujet al fairebase 
+          asi cualquier cambio en la db de auetnticacion se va a dispara el Observable sin necesidad de que se dispare nuevamente useEffect -porque es in Observable y fue iniciada 
        */
 
 
@@ -78,7 +91,7 @@ export const AppRouter = () => {
 
     if ( checking ) {  /* true */
         return (
-            <h1>Espere...</h1>
+            <h1>Wait ...</h1>
         )
     }
     /* Loading global en la app : manejado por useState solo en este componnete : puedo usar store Readux pero no merece la pena 

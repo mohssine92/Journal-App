@@ -15,7 +15,15 @@ export const types = {
     uiStartLoading: '[UI] Start loading',
     uiFinishLoading: '[UI] Finish loading',
 
+    // controlar acciones en el rudecer notesReducer
+    notesAddNew: '[Notes] New note', // [Notes] : simpelemte para saber que reducer responsable de esta accion
+    notesActive: '[Notes] Set active note',
+    notesLoad: '[Notes] Load notes',
+    notesUpdated: '[Notes] Updated note',
+    notesFileUrl: '[Notes] Updated image url',
+    notesDelete: '[Notes] Delete note',
+    notesLogoutCleaning: '[Notes] Logout Cleaning',
 
-    
 
-}
+
+} 

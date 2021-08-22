@@ -33,6 +33,18 @@
     }
 }
 
+.btn-danger {
+   background-color: red;
+  // border-radius: 6px;
+
+  // sucede arpido entonces :
+  transition: background-color .3s ease;
+
+  &:hover {
+    background-color: darken($color: red, $amount: 10); //osccuro 10%
+  }
+}
+
 .btn-block { // para butones que queremos que occupan todo bloque
     width: 100%;
 }

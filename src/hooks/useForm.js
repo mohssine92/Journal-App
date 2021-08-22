@@ -9,8 +9,8 @@ export const useForm = ( initialState = {} ) => {
     const [values, setValues] = useState(initialState);
 
     
-    const reset = () => {
-        setValues( initialState );
+    const reset = ( newFormState = initialState ) => {
+        setValues( newFormState ); // de esta forma si no mando arg form uelve a su estado inicial , si seteo valor que yo quiero por arg sera el nuevo estado 
     }
 
 

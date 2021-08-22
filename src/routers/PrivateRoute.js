@@ -15,8 +15,8 @@ export const PrivateRoute = ({
         <Route { ...rest }
             component={ (props) => (
                 ( isAuthenticated )
-                    ? ( <Component { ...props } /> )
-                    : ( <Redirect to="/auth/login" /> )
+                    ? ( <Component { ...props } /> ) 
+                    : ( <Redirect to="/auth/login" /> ) /* caso no autenticacion en backend */
             )}
         
         />

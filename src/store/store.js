@@ -10,7 +10,9 @@ import thunk from 'redux-thunk';  // es mdlr de redux - para ejecutar tareas asy
  *
 */
 import { authReducer } from '../reducers/authReducer';
+import { notesReducer } from '../reducers/notesReducer';
 import { uiReducer } from '../reducers/uiReducer';
+
  
 
 
@@ -24,10 +26,12 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 /* asi esta funcion que voy a mandar a mi store 
  * pues cuando quiero añadir Nueva funcionalidad a mi app , simplemente lo agrego a esta combinacion de reducers
  * hay reducer que econtrola estado de autenticaccion y reducer que .... son muchos estados a controlar en la app
+ * *** entonces las llaves son mis states
 */
 const reducers = combineReducers({ // este objeto va tener la estructura que va querer que sea su store en general
    auth: authReducer, // podemos decir prop auth: va ser manejada por tal reducer .
-   ui: uiReducer
+   ui: uiReducer,
+   notes: notesReducer
 })
 
 

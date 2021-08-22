@@ -14,7 +14,7 @@ export const PublicRoute = ({ // las prop que he pasado este componnete dde prot
         <Route { ...rest }
             component={ (props) => (
                 ( isAuthenticated )
-                    ? ( <Redirect to="/" /> ) // no permito esescribir l autenticacion
+                    ? ( <Redirect to="/" /> ) // no permito esescribir la autenticacion
                     : ( <Component { ...props } /> ) /* estas 2 pantallas solo si no estoy autentcado - pantallas de forms de autenticacion */
             )}
         

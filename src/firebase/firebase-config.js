@@ -18,7 +18,7 @@ firebase.initializeApp( firebaseConfig );
 
 
 
-// prepara para graba iformacion - refrencia a mo db para poder grabar
+// prepara para grabar iformacion - refrencia a mi db para poder grabar
 const db = firebase.firestore();
 
 
@@ -27,7 +27,7 @@ const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 
 export {
-    db,
+    db, // esta la ref a la base de datos 
     googleAuthProvider,
     firebase
 }

@@ -53,6 +53,7 @@
     border-radius: 4px;
     color: $dark-grey;
     display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
     overflow: hidden; // cualquier cosa sobre sale la ponemos en hidden como es el caso de image si sobre sale etc ...
 
